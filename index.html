@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Cassaforte Digitale</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #1e1e1e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: white;
+    }
+
+    .safe {
+        width: 350px;
+        height: 450px;
+        background: #2b2b2b;
+        border: 6px solid #444;
+        border-radius: 10px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        text-align: center;
+        padding: 20px;
+        position: relative;
+    }
+
+    .door {
+        width: 100%;
+        height: 250px;
+        background: #3a3a3a;
+        border: 3px solid #555;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.6s ease;
+        overflow: hidden;
+    }
+
+    .safe.open .door {
+        height: 0;
+        opacity: 0;
+    }
+
+    .lock-screen {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 18px;
+        text-align: center;
+        border: none;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        background: #4caf50;
+        color: white;
+    }
+
+    button:hover {
+        background: #45a049;
+    }
+
+    .message {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #ff6b6b;
+    }
+
+    .content {
+        display: none;
+        margin-top: 10px;
+    }
+
+    .safe.open .content {
+        display: block;
+    }
+
+    .content img {
+        width: 100%;
+        border-radius: 8px;
+        border: 2px solid #666;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="safe" id="safe">
+
+    <div class="door">
+        🔒 Cassaforte Chiusa
+    </div>
+
+    <div class="content">
+        <h3>💰 Contenuto Segreto</h3>
+        <img src="https://picsum.photos/300/200" alt="Contenuto cassaforte">
+    </div>
+
+    <div class="lock-screen">
+        <input type="password" id="code" placeholder="Inserisci codice">
+        <button onclick="checkCode()">Apri cassaforte</button>
+        <div class="message" id="message"></div>
+    </div>
+
+</div>
+
+<script>
+    const CORRECT_CODE = "1234";
+
+    function checkCode() {
+        const input = document.getElementById("code").value;
+        const safe = document.getElementById("safe");
+        const message = document.getElementById("message");
+
+        if (input === CORRECT_CODE) {
+            safe.classList.add("open");
+            message.style.color = "#4caf50";
+            message.textContent = "Cassaforte aperta!";
+        } else {
+            message.style.color = "#ff6b6b";
+            message.textContent = "Codice errato!";
+        }
+    }
+</script>
+
+</body>
+</html>
